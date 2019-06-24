@@ -1,0 +1,40 @@
+{
+  "name": "react-native-web-hooks",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "private": false,
+  "description": "Hooks for React Native web and Expo",
+  "author": "Evan Bacon <bacon@expo.io> (https://expo.io/)",
+  "homepage": "https://github.com/evanbacon/react-native-web-hooks",
+  "readmeFilename": "README.md",
+  "license": "MIT",
+  "main": "src/index.js",
+  "keywords": [
+    "expo",
+    "react-native-web",
+    "utils",
+    "react-native",
+    "css-in-js",
+    "react",
+    "hooks",
+    "ssr"
+  ],
+  "scripts": {
+    "jest": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanbacon/react-native-web-hooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evanbacon/react-native-web-hooks/issues"
+  },
+  "directories": {
+    "lib": "src"
+  },
+  "peerDependencies": {
+    "react-native": "*",
+    "prop-types": "*",
+    "fbjs": "*"
+  }
+}
