@@ -4,7 +4,7 @@ import getNode from './getNode';
 import isHoverEnabled from './isHoverEnabled';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
-export default function createPseudoHook({ events, props, propName }) {
+export default function createPseudoHook({ events, props, propName, isDisabled }) {
   return function(ref, callback) {
     if (
       // Pseudo classes only work in the browser
@@ -27,6 +27,9 @@ export default function createPseudoHook({ events, props, propName }) {
     const [bind, setBindings] = React.useState({});
 
     React.useEffect(() => {
+      if (isDisabled && isDisabled()) {
+        return;
+      }
       const node = getNode(inputRef);
 
       const resolve = value => {

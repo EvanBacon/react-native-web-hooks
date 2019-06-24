@@ -1,9 +1,11 @@
 import createPseudoHook from '../createPseudoHook';
+import isHoveredEnabled from '../isHoverEnabled';
 
 export const useActive = createPseudoHook({
   events: ['mousedown', 'mouseup'],
   props: ['onMouseDown', 'onMouseUp'],
   propName: 'isActive',
+  isDisabled: () => !isHoveredEnabled(),
 });
 
 export const useFocus = createPseudoHook({
