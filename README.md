@@ -2,6 +2,8 @@
 
 Hooks for implementing complex functionality in React Native for web and Expo.
 
+A closer look at [how the hooks work here](https://gist.github.com/EvanBacon/8739dc52a4dbb72e869f19b1e5cdda6c).
+
 ## Installation
 
 ```bash
