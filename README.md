@@ -68,7 +68,7 @@ These will be replaced by **React Flare** when it's released.
 import { useRef } from 'react';
 import { StyleSheet, Linking, Text, Platform } from 'react-native';
 
-import { useHover, useFocus, useActive } from './src';
+import { useHover, useFocus, useActive } from 'react-native-web-hooks';
 
 function Link({ children, href = '#' }) {
   const ref = useRef(null);
