@@ -1,3 +1,5 @@
+import { PixelRatio } from 'react-native';
+
 export default function useREM(multiple) {
-  return parseInt(getComputedStyle(document.documentElement).fontSize) * multiple;
+  return PixelRatio.getFontScale() * multiple;
 }
