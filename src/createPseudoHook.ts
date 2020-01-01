@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import getNode from './getNode'
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
-export default function createPseudoHook<T>({ events, props, propName, isDisabled }: any): (ref: React.MutableRefObject<T>, callback: any) => any {
+export default function createPseudoHook<T>({ events, props, propName, isDisabled }: { events: string[], props: string[], propName: string, isDisabled?: () => boolean }): (ref: React.MutableRefObject<T>, callback: any) => any {
   return function(ref, callback) {
     if (
       // Pseudo classes only work in the browser
