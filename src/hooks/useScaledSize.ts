@@ -1,6 +1,6 @@
 import useDimensions from './useDimensions';
 
-export default function useScaledSize(multiple) {
+export default function useScaledSize(multiple: number): number {
   const {
     window: { width },
   } = useDimensions();

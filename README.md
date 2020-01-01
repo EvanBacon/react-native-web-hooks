@@ -29,9 +29,11 @@ import {
 } from 'react-native-web-hooks';
 ```
 
-**Get REM size**
+#### Get REM size
 
-Use these in place of rem font sizes like: `font-size: 1.3rem`
+Use these in place of rem font sizes like: `font-size: 1.3rem`.
+
+> Note: this isn't a hook anymore and will be moved out in the future.
 
 ```jsx
 const fontSize = useREM(1.3);
@@ -39,7 +41,7 @@ const fontSize = useREM(1.3);
 return <Text style={{ fontSize }} />;
 ```
 
-**Get scaled font size**
+#### Get scaled font size
 
 These change based on the width of the screen.
 
@@ -49,7 +51,7 @@ const fontSize = useScaledSize(1.5);
 return <Text style={{ fontSize }} />;
 ```
 
-**Get dimensions**
+#### Get dimensions
 
 Note that `fontScale` is hard-coded to `1` on the `react-native-web` side and shouldn't be used to calculate dynamic font sizes.
 
@@ -60,7 +62,25 @@ const {
 } = useDimensions();
 ```
 
-**Create pseudo class styles**
+#### Measure a view
+
+It's best to style a view based on that own view's size and not the window size. To make this easier you can use the `useLayout` hook!
+
+> 🚨 Using `onLayout` may require you to install `resize-observer-polyfill`. Learn more in [the official Expo docs](https://docs.expo.io/versions/latest/guides/customizing-webpack/#resizeobserver)
+
+```jsx
+const {
+  onLayout,
+  width,
+  height,
+  x,
+  y
+} = useLayout();
+
+return <View onLayout={onLayout} />
+```
+
+#### Create pseudo class styles
 
 These will be replaced by **React Flare** when it's released.
 

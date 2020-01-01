@@ -26,4 +26,5 @@ export const useHover = createPseudoHook({
 
 export { default as useDimensions } from './useDimensions';
 export { default as useScaledSize } from './useScaledSize';
+export { default as useLayout } from './useLayout';
 export { default as useREM } from './useREM';
