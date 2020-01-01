@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import getNode from './getNode'
-import isHoverEnabled from './isHoverEnabled';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
-export default function createPseudoHook<T>({ events, props, propName, isDisabled }: any): (ref: React.Ref<T>, callback: any) => any {
+export default function createPseudoHook<T>({ events, props, propName, isDisabled }: any): (ref: React.MutableRefObject<T>, callback: any) => any {
   return function(ref, callback) {
     if (
       // Pseudo classes only work in the browser
@@ -15,7 +14,7 @@ export default function createPseudoHook<T>({ events, props, propName, isDisable
       return { [propName]: false, bind: {} };
     }
 
-    let inputRef = ref;
+    let inputRef: React.MutableRefObject<T> | null = ref;
     let inputCallback = callback;
     // Support for multi-configuration
     if (typeof ref === 'function') {
@@ -67,7 +66,7 @@ export default function createPseudoHook<T>({ events, props, propName, isDisable
         node.removeEventListener(events[0], onStart);
         node.removeEventListener(events[1], onEnd);
       };
-    }, [inputRef && (inputRef as any).current]);
+    }, [inputRef && (inputRef as React.MutableRefObject<T>).current]);
 
     return {
       [propName]: isActive,

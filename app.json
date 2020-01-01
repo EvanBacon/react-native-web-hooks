@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "entryPoint": "expo/AppEntry",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait"
+  }
+}
