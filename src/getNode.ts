@@ -1,5 +1,5 @@
+// @ts-ignore
 import { findDOMNode } from 'react-dom';
-import { Platform } from 'react-native';
 
 import getNativeNode from './getNode.native';
 

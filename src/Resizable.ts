@@ -2,7 +2,7 @@ import * as React from 'react';
 import { element, func, oneOfType, oneOf } from 'prop-types';
 import { Dimensions } from 'react-native';
 
-export default class Resizable extends React.Component {
+export default class Resizable extends React.Component<{ target: 'window' | 'screen' }> {
   static displayName = 'Resizable';
 
   static propTypes = {
