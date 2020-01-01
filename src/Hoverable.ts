@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import isHoverEnabled from './isHoverEnabled';
 
-export default class Hoverable extends React.Component {
+export default class Hoverable extends React.Component<{ children: (isHovered: boolean) => any | React.ReactChild; onHoverIn?: Function; onHoverOut?: Function }, { isHovered: boolean; showHover: boolean; }> {
   static displayName = 'Hoverable';
   static propTypes = {
     children: oneOfType([func, element]),

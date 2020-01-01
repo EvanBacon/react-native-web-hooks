@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Linking, Text, Platform, View } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Linking, Text as RNText, Platform, View, TextProps } from 'react-native';
 
-import * as Pseudo from './src';
+import * as Pseudo from './build';
 
 export default function App() {
   return (
@@ -15,9 +15,11 @@ export default function App() {
   );
 }
 
-function Link({ children, href = '#' }) {
-  const ref = React.useRef(null);
+const Text = RNText as any;
 
+function Link({ children, href = '#' }) {
+  const ref = React.useRef<Text>(null);
+  
   const { isHovered } = Pseudo.useHover(ref);
   const { isFocused } = Pseudo.useFocus(ref);
   const { isActive } = Pseudo.useActive(ref);
