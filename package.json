@@ -1,6 +1,6 @@
 {
   "name": "react-native-web-hooks",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "sideEffects": false,
   "private": false,
   "description": "Hooks for React Native web and Expo",
