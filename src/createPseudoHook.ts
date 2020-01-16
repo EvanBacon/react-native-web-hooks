@@ -15,8 +15,11 @@ export default function createPseudoHook<T>({ events }: { events: string[] }): (
 
     React.useEffect(() => {
       const [eventIn, eventOut] = events;
-      const node = getNode(ref);
 
+      const node = getNode(ref);
+      if (!node) {
+        return;
+      }
       const resolve = value => {
         setActive(value);
       };
