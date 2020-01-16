@@ -3,9 +3,54 @@ import { StyleSheet, Linking, Text as RNText, Platform, View, TextProps } from '
 
 import * as Pseudo from './build';
 
+
+// Use class to test if the ref is bubbling
+class TestContainer extends React.Component {
+  render() {
+    const props = this.props as any;
+    return (
+      <>
+      <View
+      {...props}
+      style={[{
+        backgroundColor: 'orange',
+        borderColor: 'black',
+        padding: 8
+      }, props.style]} />
+      </>
+    )
+  }
+}
+
+const TestText = ({ on, ...props }) => {
+  return (
+    <Text
+    {...props}
+    style={[{
+      fontSize: 'bold', 
+      color: on ? 'green' : 'blue' 
+    }, props.style]} />
+  )
+}
+
+function ActiveRefTest() {
+
+  const ref = React.useRef(null);
+  const isActive = Pseudo.useActive(ref);
+
+  return (
+    <TestContainer ref={ref}>
+      <TestText on={isActive}>
+        Test Active ref
+      </TestText>
+    </TestContainer>
+  )
+}
+
 export default function App() {
   return (
     <View style={styles.container}>
+      <ActiveRefTest />
       <Link>Link #1</Link>
       <Link>Link #2</Link>
       <Link>Link #3</Link>
@@ -19,10 +64,10 @@ const Text = RNText as any;
 
 function Link({ children, href = '#' }) {
   const ref = React.useRef<Text>(null);
-  
-  const { isHovered } = Pseudo.useHover(ref);
-  const { isFocused } = Pseudo.useFocus(ref);
-  const { isActive } = Pseudo.useActive(ref);
+
+  const isHovered = Pseudo.useHover(ref);
+  const isFocused = Pseudo.useFocus(ref);
+  const isActive = Pseudo.useActive(ref);
 
   return (
     <View style={styles.container}>

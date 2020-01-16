@@ -93,9 +93,9 @@ import { useHover, useFocus, useActive } from 'react-native-web-hooks';
 function Link({ children, href = '#' }) {
   const ref = useRef(null);
 
-  const { isHovered } = useHover(ref);
-  const { isFocused } = useFocus(ref);
-  const { isActive } = useActive(ref);
+  const isHovered = useHover(ref);
+  const isFocused = useFocus(ref);
+  const isActive = useActive(ref);
 
   return (
     <Text

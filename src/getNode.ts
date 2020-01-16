@@ -10,7 +10,7 @@ function getNode(ref) {
     return node;
   } catch (error) {
     console.error(`Couldn't find node`, error, { ref });
-    return null;
+    throw new Error('Failed to use pseudo-class hook')
   }
 }
 
