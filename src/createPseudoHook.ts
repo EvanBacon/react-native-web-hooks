@@ -1,76 +1,45 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import getNode from './getNode'
-import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
-export default function createPseudoHook<T>({ events, props, propName, isDisabled }: { events: string[], props: string[], propName: string, isDisabled?: () => boolean }): (ref: React.MutableRefObject<T>, callback: any) => any {
-  return function(ref, callback) {
+export default function createPseudoHook<T>({ events }: { events: string[] }): (ref: React.MutableRefObject<T>) => any {
+  return function(ref) {
     if (
       // Pseudo classes only work in the browser
-      Platform.OS !== 'web' ||
-      // Account for SSR :rolls_eyes:
-      !canUseDOM
+      Platform.OS !== 'web'
     ) {
-      return { [propName]: false, bind: {} };
+      return false;
     }
-
-    let inputRef: React.MutableRefObject<T> | null = ref;
-    let inputCallback = callback;
-    // Support for multi-configuration
-    if (typeof ref === 'function') {
-      inputRef = null;
-      inputCallback = ref;
-    }
-
+  
     const [isActive, setActive] = React.useState(false);
-    const [bind, setBindings] = React.useState({});
 
     React.useEffect(() => {
-      if (isDisabled && isDisabled()) {
-        return;
-      }
-      const node = getNode(inputRef);
+      const [eventIn, eventOut] = events;
+      const node = getNode(ref);
 
       const resolve = value => {
-        if (inputCallback) {
-          inputCallback(value);
-        }
         setActive(value);
       };
 
-      if (!(node && typeof node.addEventListener === 'function')) {
-        setBindings({
-          // @ts-ignore
-          [props[0]]: resolve.bind(this, true),
-          // @ts-ignore
-          [props[1]]: resolve.bind(this, false),
-        });
-        return;
-      }
-      setBindings({});
-      
       // @ts-ignore
       const onStart = resolve.bind(this, true);
       // @ts-ignore
       const onEnd = resolve.bind(this, false);
 
-      node.addEventListener(events[0], onStart);
-      node.addEventListener(events[1], onEnd);
+      node.addEventListener(eventIn, onStart);
+      node.addEventListener(eventOut, onEnd);
 
-      if (events[1] === 'mouseup') {
-        document.addEventListener(events[1], onEnd, false);
+      // Special case for useActive to respond when the user drags out of the view and releases.
+      if (eventOut === 'mouseup') {
+        document.addEventListener(eventOut, onEnd, false);
       }
       return () => {
-        document.removeEventListener(events[1], onEnd, false);
-        if (!node) return;
-        node.removeEventListener(events[0], onStart);
-        node.removeEventListener(events[1], onEnd);
+        document.removeEventListener(eventOut, onEnd, false);
+        node.removeEventListener(eventIn, onStart);
+        node.removeEventListener(eventOut, onEnd);
       };
-    }, [inputRef && (inputRef as React.MutableRefObject<T>).current]);
+    }, [ref && ref.current]);
 
-    return {
-      [propName]: isActive,
-      bind,
-    };
+    return isActive
   };
 }
