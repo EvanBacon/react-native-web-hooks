@@ -1,1 +1,3 @@
-export default () => false;
+const isHoverEnabled = () => false;
+
+export default isHoverEnabled;
