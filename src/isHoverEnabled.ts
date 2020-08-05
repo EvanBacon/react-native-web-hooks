@@ -36,4 +36,6 @@ if (canUseDOM) {
   document.addEventListener('mousemove', enableHover, true);
 }
 
-export default () => isEnabled;
+const isHoverEnabled = () => isEnabled;
+
+export default isHoverEnabled;
